@@ -124,6 +124,7 @@ void DeleteBoss() {
         }
     }
 }
+
 void ShowBossSkill_Circle() {                //스킬궤도 왼쪽위 좌표 (BossX-5,BossY-5)
     int X, Y;
     int TC = ((TimeCount - 1) % 5) * 3;         //움직임 구현
@@ -456,6 +457,7 @@ void ShowBossSkill_RectOrbit(int X1, int Y1, int X2, int Y2) {                  
         Y2 += 4;
     }
 }
+
 void ShowBossSkill_WaffleOrbit() {
     textcolor(WHITE);
     for (int y = 1; y < GBOARD_HEIGHT + 1; y++) {
@@ -2024,6 +2026,7 @@ void ShowBossSkill_Waffle_Down(int y1) {
         random = 5;
     }
 }
+
 void DeleteBossSkill() {
     for (int y = 0; y < GBOARD_HEIGHT + 2; y++) {
         for (int x = 0; x < GBOARD_WIDTH + 2; x++) {
