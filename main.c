@@ -12,8 +12,15 @@
 #include "GameBoard.h"
 #include "PCNPC.h"
 #include "Color.h"
-#include"GameBoard.h"
+#include "MainMenu.h"
+#include "Skill.h"
+#include "Stage.h"
+#include "InitGameData.h"
+#include "ItemData.h"
+#include "Boss.h"
 
+//함수
+//void FindKeyboardValue(); //키보드 입력값 찾기
 
 //메인 함수
 void main() {
@@ -22,33 +29,26 @@ void main() {
 	RemoveCursor(); //커서 지우기
 	srand((int)time(NULL)); //랜덤 변수 시작
 
-	//EraseGameBoard();
-	//UI 출력
-	//DrawIngameUI();
-
-	//PC 위치 게임에 추가
-	//init_PCPoint();
-	SetCurrentCursorPos(GBOARD_ORIGIN_X + PCPoint[0] * 2, GBOARD_ORIGIN_Y + PCPoint[1]);
-	drawPC();
-
-	//게임판 그리기
-	DrawBoard();
-	while (1) {
-		ProcessKeyInput();
-	}
-
-	//데이터 초기화
-	//initMemory();
-	//initSkill();
-	//initPosUI();
-	//defineItem();
-
+	//키보드 코드 확인
+	//FindKeyboardValue();
 	//게임판 중앙 위치
-	//center.X = GBOARD_ORIGIN_X + GBOARD_WIDTH;
-	//enter.Y = GBOARD_ORIGIN_Y + GBOARD_HEIGHT / 2 - 1;
+	center.X = GBOARD_ORIGIN_X + GBOARD_WIDTH;
+	center.Y = GBOARD_ORIGIN_Y + GBOARD_HEIGHT / 2 - 1;
+	//데이터 초기화
+	initMemory();
+	initSkill();
+	initPosUI();
+	defineItem();
 
 	//메인 메뉴 호출
-	//ShowMainMenu();
+	ShowMainMenu();
 }
 
+//기타 함수
+void FindKeyboardValue() {
+	while (1) {
+		GetKeyboardInput();
+		printf("%d", key);
+	}
+}
 
