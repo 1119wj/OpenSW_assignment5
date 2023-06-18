@@ -570,3 +570,88 @@ void sub_AddEffectByDirection(COORD cursor, int type, int level, int x, int y, i
 		}
 	}
 }
+void erase_AddEffectByDirection(COORD cursor, int type, int level, int x, int y, int nx, int ny, int dir) {
+	//예외 처리
+	if (skillList[type - 1][level - 1].effect[nx][ny] == 0) return; //스킬이펙트가 없을 경우 넘기기
+	if (cursor.X + x < GBOARD_ORIGIN_X - 1 || cursor.X + x > GBOARD_ORIGIN_X + GBOARD_WIDTH * 2 || cursor.Y + y < GBOARD_ORIGIN_Y || cursor.Y + y > GBOARD_ORIGIN_Y + GBOARD_HEIGHT) return; //커서가 게임판 내부를 벗어나면 넘기기
+
+	COORD arrCur = ConvertCursorIntoArrCur(cursor);
+
+	//이전 근접 이펙트 지우기
+	if (GameBoardInfo[arrCur.Y + y][arrCur.X + x] >= 400) {
+		GameBoardInfo[arrCur.Y + y][arrCur.X + x] = 0;
+		SetCurrentCursorPos(cursor.X + x * 2, cursor.Y + y);
+		printf("  ");
+	}
+}
+void AddEffectByDirection(int skillNum, int dir) {
+	if (skillNum == 0) return; //스킬이 없으면 리턴
+
+	COORD cursor;
+	int type = (skillNum / 100) % 10;
+	int level = (skillNum / 10) % 10;
+
+	if (type < 1 || type > 9 || level < 1 || level > 3) return; //예외 처리
+
+	pc.X = PCPoint[0];
+	pc.Y = PCPoint[1];
+
+	flag = 0;
+
+	//현재 이펙트 그리기
+	switch (dir)
+	{
+	default:
+		break;
+	case EAST:
+		cursor.X = GBOARD_ORIGIN_X + (pc.X + EFFECT_SIZE - 2) * 2;
+		cursor.Y = GBOARD_ORIGIN_Y + pc.Y - 1;
+		SetCurrentCursorPos(cursor.X, cursor.Y);
+		for (int y = EFFECT_SIZE - 1; y >= 0; y--) {
+			for (int x = EFFECT_SIZE - 1; x >= 0; x--) {
+				sub_AddEffectByDirection(cursor, type, level, x, y, EFFECT_SIZE - 1 - y, EFFECT_SIZE - 1 - x, dir);
+			}
+		}
+		break;
+	case WEST:
+		cursor.X = GBOARD_ORIGIN_X + (pc.X - EFFECT_SIZE) * 2;
+		cursor.Y = GBOARD_ORIGIN_Y + pc.Y - 1;
+		SetCurrentCursorPos(cursor.X, cursor.Y);
+		for (int y = 0; y < EFFECT_SIZE; y++) {
+			for (int x = 0; x < EFFECT_SIZE; x++) {
+				sub_AddEffectByDirection(cursor, type, level, x, y, y, x, dir);
+			}
+		}
+		break;
+	case NORTH:
+		cursor.X = GBOARD_ORIGIN_X + (pc.X - 1) * 2;
+		cursor.Y = GBOARD_ORIGIN_Y + pc.Y - 4;
+		SetCurrentCursorPos(cursor.X, cursor.Y);
+		for (int y = 0; y < EFFECT_SIZE; y++) {
+			for (int x = EFFECT_SIZE - 1; x >= 0; x--) {
+				sub_AddEffectByDirection(cursor, type, level, x, y, EFFECT_SIZE - 1 - x, y, dir);
+			}
+		}
+		break;
+	case SOUTH:
+		cursor.X = GBOARD_ORIGIN_X + (pc.X - 1) * 2;
+		cursor.Y = GBOARD_ORIGIN_Y + pc.Y + 2;
+		SetCurrentCursorPos(cursor.X, cursor.Y);
+		for (int y = EFFECT_SIZE - 1; y >= 0; y--) {
+			for (int x = 0; x < EFFECT_SIZE; x++) {
+				sub_AddEffectByDirection(cursor, type, level, x, y, x, EFFECT_SIZE - 1 - y, dir);
+			}
+		}
+		break;
+	}
+
+	//디버그
+	/*SetCurrentCursorPos(GBOARD_ORIGIN_X + GBOARD_WIDTH * 2 + 4, 25);
+	printf("출력%d", TimeCount);
+	for (int y = 0; y < 3; y++) {
+		for (int x = 0; x < 3; x++) {
+			SetCurrentCursorPos(GBOARD_ORIGIN_X + GBOARD_WIDTH * 2 + (x + 2) * 4, 26 + y);
+			printf("%03d,", skillList[type - 1][level - 1].effect[y][x]);
+		}
+	}*/
+}
