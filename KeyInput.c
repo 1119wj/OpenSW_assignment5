@@ -6,7 +6,7 @@
 #include <time.h>
 #include <conio.h>
 #include <stdbool.h>
-//«Ï¥ı ∆ƒ¿œ
+//Ìó§Îçî ÌååÏùº
 #include "Cursor.h"
 #include "KeyInput.h"
 #include "GameBoard.h"
@@ -53,28 +53,28 @@ void ProcessKeyInput() {
                 lastDir = dir;
                 PcShiftDown();
                 break;
-            case W: //¿œΩ√¡§¡ˆ
+            case W: //ÏùºÏãúÏ†ïÏßÄ
                 PauseGame();
                 break;
-                //case A:   // A ¥©∏£∏È Alldie
+                //case A:   // A ÎàÑÎ•¥Î©¥ Alldie
                 //    AllDie();
                 //    break;
             }
         }
-        //¿Ã∆Â∆Æ ¿Ãµø º”µµ
+        //Ïù¥ÌéôÌä∏ Ïù¥Îèô ÏÜçÎèÑ
         switch (selectedSkill[0] / 100)
         {
-        case 1: //±«√—
+        case 1: //Í∂åÏ¥ù
             if (AttackCount % 1 == 0) SkillEffectMove();
             break;
-        case 2: //ªÍ≈∫√—
+        case 2: //ÏÇ∞ÌÉÑÏ¥ù
             if (AttackCount % 3 == 0) SkillEffectMove();
             break;
-        case 3: //ºÆ±√
+        case 3: //ÏÑùÍ∂Å
             if (AttackCount % 6 == 0) SkillEffectMove();
             break;
         }
-        //∞‘¿” º”µµ
+        //Í≤åÏûÑ ÏÜçÎèÑ
         Sleep(Diff.speed);
     }
     if (stage == 2) {
@@ -89,28 +89,28 @@ void ProcessKeyInput() {
                 {
                 case 0:
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 12 + 14 * i);
-                    printf("°„¢∫");
+                    printf("‚ñ≤‚ñ∂");
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 13 + 14 * i);
-                    printf("¢∏°Â");
+                    printf("‚óÄ‚ñº");
                     break;
                 case 1:
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 12 + 14 * i);
-                    printf("¢∏°„");
+                    printf("‚óÄ‚ñ≤");
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 13 + 14 * i);
-                    printf("°Â¢∫");
+                    printf("‚ñº‚ñ∂");
                     break;
 
                 case 2:
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 12 + 14 * i);
-                    printf("°Â¢∏");
+                    printf("‚ñº‚óÄ");
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 13 + 14 * i);
-                    printf("¢∫°„");
+                    printf("‚ñ∂‚ñ≤");
                     break;
                 case 3:
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 12 + 14 * i);
-                    printf("¢∫°Â");
+                    printf("‚ñ∂‚ñº");
                     SetCurrentCursorPos(GBOARD_ORIGIN_X + 13 * 2 + j * 32, GBOARD_ORIGIN_Y + 13 + 14 * i);
-                    printf("°„¢∏");
+                    printf("‚ñ≤‚óÄ");
                     break;
                 }
             }
@@ -120,25 +120,25 @@ void ProcessKeyInput() {
     drawTime();
 
     if (stage != 3 && TimeCount == STAGETIME / 2) {
-        displayNotice("¿˚¿Ã ¥ı ∫¸∏£∞‘ ª˝º∫µÀ¥œ¥Ÿ.");
+        displayNotice("Ï†ÅÏù¥ Îçî Îπ†Î•¥Í≤å ÏÉùÏÑ±Îê©ÎãàÎã§.");
 
         Diff.spawnSpeed /= 2;
     }
     else if (stage != 3 && TimeCount == STAGETIME / 2 + 10) eraseNotice();
 
     if (stage == 3) {
-        //∫∏Ω∫¿¸
+        //Î≥¥Ïä§Ï†Ñ
         SetCurrentCursorPos(128, 20);
         textcolor(GREEN);
-        printf("¢∫ ∫∏Ω∫ HP : ");
-        for (int i = 0; i <= BossHP / 10; i++)printf("¢æ");
+        printf("‚ñ∂ Î≥¥Ïä§ HP : ");
+        for (int i = 0; i <= BossHP / 10; i++)printf("‚ô•");
         for (int i = 0; i < 10 - BossHP / 10; i++)printf("  ");
         int move = 100; //time: move
 
-        //Ω∫≈≥ ¿Ã∆Â∆Æ ¿Ãµø
+        //Ïä§ÌÇ¨ Ïù¥ÌéôÌä∏ Ïù¥Îèô
         SkillEffectMove();
 
-        //pc ø¯∞≈∏Æ Ω∫≈≥
+        //pc ÏõêÍ±∞Î¶¨ Ïä§ÌÇ¨
         if (TimeCount % Diff.attackSpeed == 0) {
             for (int i = 0; i < 3; i++) {
                 if (selectedSkill[i] == 0) continue;
@@ -146,7 +146,7 @@ void ProcessKeyInput() {
             }
         }
 
-        //pc ±Ÿ∞≈∏Æ Ω∫≈≥ ∞¯∞›
+        //pc Í∑ºÍ±∞Î¶¨ Ïä§ÌÇ¨ Í≥µÍ≤©
         if (TimeCount % Diff.attackSpeed >= Diff.attackSpeed / 2) {
             if (selectedSkill[1] / 100 % 10 == 4) {
                 switch (dir)
@@ -180,30 +180,30 @@ void ProcessKeyInput() {
             else AddEffectByDirection(selectedSkill[1], dir);
         }
 
-        //∫∏Ω∫ «‡µø Ω√πƒ∑π¿Ãº«; bossFlag=0~3 -> 0:Circle, 1:Rect, 2:Waffle
+        //Î≥¥Ïä§ ÌñâÎèô ÏãúÎÆ¨Î†àÏù¥ÏÖò; bossFlag=0~3 -> 0:Circle, 1:Rect, 2:Waffle
         if (TimeCount % move == 3) { bossFlag = 0; }
-        if (TimeCount % move == 9) { DeleteBossSkill(); bossFlag = 1; } //∫∏Ω∫ ∏ÿ√„
-        if (TimeCount % move == 50) { DeleteBossSkill(); bossFlag = 2; } //∫∏Ω∫ ∏ÿ√„
+        if (TimeCount % move == 9) { DeleteBossSkill(); bossFlag = 1; } //Î≥¥Ïä§ Î©àÏ∂§
+        if (TimeCount % move == 50) { DeleteBossSkill(); bossFlag = 2; } //Î≥¥Ïä§ Î©àÏ∂§
         if (TimeCount == TimeCount2 + 1) { DeleteBossSkill(); }
         if (TimeCount % move == 80) { DeleteBossSkill(); bossFlag = 3; }
         if (TimeCount % move == 95) { DeleteBossSkill(); bossFlag = 0; }
 
         if ((bossFlag == 0 || bossFlag == 3) && TimeCount % 2 == 0) BossMove();
         else if (bossFlag == 1) {
-            //Ω∫≈≥ Rect Ω√¿¸
+            //Ïä§ÌÇ¨ Rect ÏãúÏ†Ñ
             if (TimeCount % move == 10) {
-                //æ»¬  ªÁ∞¢«¸ øﬁ¬ ¿ß ø¿∏•¬  æ∆∑°¡¬«•
+                //ÏïàÏ™Ω ÏÇ¨Í∞ÅÌòï ÏôºÏ™ΩÏúÑ Ïò§Î•∏Ï™Ω ÏïÑÎûòÏ¢åÌëú
                 XX1 = BossPoint[0] - 4;
                 YY1 = BossPoint[1] - 4;
                 XX2 = BossPoint[0] + 10;
                 YY2 = BossPoint[1] + 10;
-                ShowBossSkill_RectOrbit(XX1, YY1, XX2, YY2);   //±Àµµ
+                ShowBossSkill_RectOrbit(XX1, YY1, XX2, YY2);   //Í∂§ÎèÑ
             }
             else if (TimeCount % move == 14) {
                 DeleteBossSkill2();
             }
             else if (TimeCount % move == 15) {
-                //æ»¬  ªÁ∞¢«¸ øﬁ¬ ¿ß ø¿∏•¬  æ∆∑°¡¬«•
+                //ÏïàÏ™Ω ÏÇ¨Í∞ÅÌòï ÏôºÏ™ΩÏúÑ Ïò§Î•∏Ï™Ω ÏïÑÎûòÏ¢åÌëú
                 ShowBossSkill_Rect(XX1, YY1, XX2, YY2);
             }
             else if (TimeCount % move > 15 && TimeCount % 2 == 1)
@@ -211,7 +211,7 @@ void ProcessKeyInput() {
             GameClear();
         }
         else if (bossFlag == 2) {
-            //Ω∫≈≥ Waffle Ω√¿¸
+            //Ïä§ÌÇ¨ Waffle ÏãúÏ†Ñ
             if (TimeCount % move == 51) {
                 ShowBossSkill_WaffleOrbit();
             }
@@ -220,12 +220,12 @@ void ProcessKeyInput() {
             }
             else if (TimeCount % move == 55) {
                 random = rand() % 4 + 1;
-                if (random == 1) x3 = 1; //øﬁ¬ 
-                else if (random == 2) y3 = 1; //¿ß
-                else if (random == 3)  x3 = GBOARD_WIDTH; //ø¿∏•¬ 
-                else if (random == 4) y3 = GBOARD_HEIGHT; //æ∆∑°
+                if (random == 1) x3 = 1; //ÏôºÏ™Ω
+                else if (random == 2) y3 = 1; //ÏúÑ
+                else if (random == 3)  x3 = GBOARD_WIDTH; //Ïò§Î•∏Ï™Ω
+                else if (random == 4) y3 = GBOARD_HEIGHT; //ÏïÑÎûò
                 ShowBoss();
-            } //TimeCount 5µøæ» ∏ÿ√„
+            } //TimeCount 5ÎèôÏïà Î©àÏ∂§
             else if (TimeCount % move > 55 && TimeCount % 2 == 0)
             {
                 if (random == 1)  ShowBossSkill_Waffle_Left(x3);
@@ -236,14 +236,14 @@ void ProcessKeyInput() {
         }
     }
     else {
-        //¿œπ›¿¸
+        //ÏùºÎ∞òÏ†Ñ
 
-        //pc ø¯∞≈∏Æ Ω∫≈≥ ∞¯∞›
+        //pc ÏõêÍ±∞Î¶¨ Ïä§ÌÇ¨ Í≥µÍ≤©
         if (TimeCount % Diff.attackSpeed == 0) {
             AddEffectByDirection(selectedSkill[0], dir);
         }
 
-        //pc ±Ÿ∞≈∏Æ Ω∫≈≥ ∞¯∞›
+        //pc Í∑ºÍ±∞Î¶¨ Ïä§ÌÇ¨ Í≥µÍ≤©
         if (TimeCount % Diff.attackSpeed >= Diff.attackSpeed / 2) {
             if (selectedSkill[1] / 100 % 10 == 4) {
                 switch (dir)
@@ -277,7 +277,7 @@ void ProcessKeyInput() {
             else AddEffectByDirection(selectedSkill[1], dir);
         }
 
-        //∞‘¿”∆«ø° ¿÷¥¬ ø‰º“ ¿Ãµø
+        //Í≤åÏûÑÌåêÏóê ÏûàÎäî ÏöîÏÜå Ïù¥Îèô
         SkillEffectMove();
         if (TimeCount % Diff.npcSpeed == 0) {
             NpcMove();
@@ -287,78 +287,15 @@ void ProcessKeyInput() {
 
         SetCurrentCursorPos(133, 15);
         textcolor(WHITE);
-        for (int i = 0; i < TimeCount % Diff.attackSpeed; i++)printf("°·");
-        for (int i = 0; i < Diff.attackSpeed - TimeCount % Diff.attackSpeed - 1; i++)printf("°‡");
+        for (int i = 0; i < TimeCount % Diff.attackSpeed; i++)printf("‚ñ†");
+        for (int i = 0; i < Diff.attackSpeed - TimeCount % Diff.attackSpeed - 1; i++)printf("‚ñ°");
 
 
 
 
-        //≥™¥©¥¬ ∞™¿∏∑Œ º”µµ ¡∂¿˝
+        //ÎÇòÎàÑÎäî Í∞íÏúºÎ°ú ÏÜçÎèÑ Ï°∞Ï†à
         if (TimeCount % Diff.spawnSpeed == 0) NpcSpawn();
         if (TimeCount % Diff.spawnSpeed == 0) RangeNpcSpawn();
         if (TimeCount % Diff.projectileSpawnSpeed == 2) RangeNpcAttack();
-    }
-    if(stage != 3) {
-    //¿œπ›¿¸
-
-    //pc ø¯∞≈∏Æ Ω∫≈≥ ∞¯∞›
-    /*if (TimeCount % Diff.attackSpeed == 0) {
-        AddEffectByDirection(selectedSkill[0], dir);
-    }
-
-    //pc ±Ÿ∞≈∏Æ Ω∫≈≥ ∞¯∞›
-    if (TimeCount % Diff.attackSpeed >= Diff.attackSpeed / 2) {
-        if (selectedSkill[1] / 100 % 10 == 4) {
-            switch (dir)
-            {
-            case EAST:
-                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], NORTH);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], EAST);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], SOUTH);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
-                break;
-            case NORTH:
-                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], WEST);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], NORTH);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], EAST);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
-                break;
-            case WEST:
-                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], SOUTH);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], WEST);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], NORTH);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
-                break;
-            case SOUTH:
-                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], EAST);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], SOUTH);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], WEST);
-                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
-                break;
-            }
-        }
-        else AddEffectByDirection(selectedSkill[1], dir);
-    }
-    */
-    //∞‘¿”∆«ø° ¿÷¥¬ ø‰º“ ¿Ãµø
-    //SkillEffectMove();
-    if (TimeCount % Diff.npcSpeed == 0) {
-        NpcMove();
-        RangeNpcMove();
-    }
-    ProjectileMove();
-
-    SetCurrentCursorPos(133, 15);
-    textcolor(WHITE);
-    for (int i = 0; i < TimeCount % Diff.attackSpeed; i++)printf("°·");
-    for (int i = 0; i < Diff.attackSpeed - TimeCount % Diff.attackSpeed - 1; i++)printf("°‡");
-
-
-
-
-    //≥™¥©¥¬ ∞™¿∏∑Œ º”µµ ¡∂¿˝
-    if (TimeCount % Diff.spawnSpeed == 0) NpcSpawn();
-    if (TimeCount % Diff.spawnSpeed == 0) RangeNpcSpawn();
-    if (TimeCount % Diff.projectileSpawnSpeed == 2) RangeNpcAttack();
     }
 }
