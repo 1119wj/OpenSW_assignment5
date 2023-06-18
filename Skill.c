@@ -12,11 +12,12 @@
 #include "GameBoard.h"
 #include "PCNPC.h"
 #include "Color.h"
-
+#include "MainMenu.h"
 #include "Skill.h"
 #include "Stage.h"
 #include "InitGameData.h"
 #include "ItemData.h"
+#include "Boss.h"
 skill skillList[SKILL_TYPE][SKILL_LEVEL]; //스킬 목록
 int selectedSkill[SELECT_SIZE]; //보유한 스킬 번호(110, 120, 130, 210, ...)
 skillEffect skillEffectInfo[GBOARD_HEIGHT * GBOARD_WIDTH]; //스킬 이펙트 좌표 저장 배열
