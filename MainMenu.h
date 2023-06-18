@@ -12,7 +12,7 @@ typedef struct memory {
 
 extern int scoreboard[SCOREBOARD__SIZE]; //스코어보드
 extern memory memoryList[MEMORY_SIZE]; //기억 목록
-
+extern COORD center; //게임판 중앙 좌표
 void GetKeyboardInput(); //키보드 입력받는 함수
 void ShowMainMenu(); //메인 메뉴 출력
 void StartGame(); //1. 게임 시작; 컨셉과 프레임만 구현
