@@ -298,4 +298,67 @@ void ProcessKeyInput() {
         if (TimeCount % Diff.spawnSpeed == 0) RangeNpcSpawn();
         if (TimeCount % Diff.projectileSpawnSpeed == 2) RangeNpcAttack();
     }
+    if(stage != 3) {
+    //일반전
+
+    //pc 원거리 스킬 공격
+    /*if (TimeCount % Diff.attackSpeed == 0) {
+        AddEffectByDirection(selectedSkill[0], dir);
+    }
+
+    //pc 근거리 스킬 공격
+    if (TimeCount % Diff.attackSpeed >= Diff.attackSpeed / 2) {
+        if (selectedSkill[1] / 100 % 10 == 4) {
+            switch (dir)
+            {
+            case EAST:
+                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], NORTH);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], EAST);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], SOUTH);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
+                break;
+            case NORTH:
+                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], WEST);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], NORTH);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], EAST);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
+                break;
+            case WEST:
+                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], SOUTH);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], WEST);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], NORTH);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
+                break;
+            case SOUTH:
+                if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2) AddEffectByDirection(selectedSkill[1], EAST);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 1) AddEffectByDirection(selectedSkill[1], SOUTH);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 2) AddEffectByDirection(selectedSkill[1], WEST);
+                else if (TimeCount % Diff.attackSpeed == Diff.attackSpeed / 2 + 3) AddEffectByDirection(selectedSkill[1], dir);
+                break;
+            }
+        }
+        else AddEffectByDirection(selectedSkill[1], dir);
+    }
+    */
+    //게임판에 있는 요소 이동
+    //SkillEffectMove();
+    if (TimeCount % Diff.npcSpeed == 0) {
+        NpcMove();
+        RangeNpcMove();
+    }
+    ProjectileMove();
+
+    SetCurrentCursorPos(133, 15);
+    textcolor(WHITE);
+    for (int i = 0; i < TimeCount % Diff.attackSpeed; i++)printf("■");
+    for (int i = 0; i < Diff.attackSpeed - TimeCount % Diff.attackSpeed - 1; i++)printf("□");
+
+
+
+
+    //나누는 값으로 속도 조절
+    if (TimeCount % Diff.spawnSpeed == 0) NpcSpawn();
+    if (TimeCount % Diff.spawnSpeed == 0) RangeNpcSpawn();
+    if (TimeCount % Diff.projectileSpawnSpeed == 2) RangeNpcAttack();
+    }
 }

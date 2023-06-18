@@ -6,7 +6,7 @@
 #include <time.h>
 #include <conio.h>
 #include <stdbool.h>
-//Çì´õ ÆÄÀÏ
+//í—¤ë” íŒŒì¼
 #include "Cursor.h"
 #include "KeyInput.h"
 #include "GameBoard.h"
@@ -34,7 +34,7 @@ COORD pos_skillSelect;
 COORD cursor;
 int maxExpScore;
 
-//°ÔÀÓÆÇ ¿µ¿ª Áö¿ì±â; ½ºÅ×ÀÌÁö Ç¥½Ã Áö¿ì±â¿ë
+//ê²Œì„íŒ ì˜ì—­ ì§€ìš°ê¸°; ìŠ¤í…Œì´ì§€ í‘œì‹œ ì§€ìš°ê¸°ìš©
 void ClearGameBoard() {
     int x, y;
     for (y = 1; y < GBOARD_HEIGHT; y++) {
@@ -48,13 +48,13 @@ void ClearGameBoard() {
 }
 
 
-//º¸µå ÀüºÎ Áö¿ì±â
+//ë³´ë“œ ì „ë¶€ ì§€ìš°ê¸°
 void ClearBoard() {
-    system("cls"); //ÄÜ¼ÖÃ¢ ÀüºÎ Áö¿ì´Â ¸í·É¾î
+    system("cls"); //ì½˜ì†”ì°½ ì „ë¶€ ì§€ìš°ëŠ” ëª…ë ¹ì–´
 }
 
-//°ÔÀÓÆÇ Å×µÎ¸® ±×¸®°í °ÔÀÓÆÇ Á¤º¸¸¦ GameBoardInfo ¹è¿­¿¡ ÀúÀåÇÏ´Â ÇÔ¼ö
-//Å×µÎ¸®: ¼¼·Î = 0, GBOARD_HEIGHT / °¡·Î = 0, GBOARD_WIDTH
+//ê²Œì„íŒ í…Œë‘ë¦¬ ê·¸ë¦¬ê³  ê²Œì„íŒ ì •ë³´ë¥¼ GameBoardInfo ë°°ì—´ì— ì €ì¥í•˜ëŠ” í•¨ìˆ˜
+//í…Œë‘ë¦¬: ì„¸ë¡œ = 0, GBOARD_HEIGHT / ê°€ë¡œ = 0, GBOARD_WIDTH
 
 void DrawBoard() {
     int x, y;
@@ -62,73 +62,73 @@ void DrawBoard() {
     textcolor(WHITE);
     textcolor(YELLOW);
 
-    //»ó´Ü
+    //ìƒë‹¨
     for (x = 1; x < GBOARD_WIDTH; x++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y);
-        printf("¡á");
+        printf("â– ");
         GameBoardInfo[0][x] = 1;
-
+        
     }
 
-    //ÇÏ´Ü
+    //í•˜ë‹¨
     for (x = 1; x < GBOARD_WIDTH * 2; x++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X + x, GBOARD_ORIGIN_Y + GBOARD_HEIGHT);
-        printf("¡á");
+        printf("â– ");
         GameBoardInfo[GBOARD_HEIGHT][x] = 1;
     }
 
-    //¿ìº¯
+    //ìš°ë³€
     for (y = 0; y <= GBOARD_HEIGHT; y++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X + GBOARD_WIDTH * 2, GBOARD_ORIGIN_Y + y);
-        if (y == 0) printf("¡á");
-        else if (y == GBOARD_HEIGHT) printf("¡á");
-        else printf("¡á");
+        if (y == 0) printf("â– ");
+        else if (y == GBOARD_HEIGHT) printf("â– ");
+        else printf("â– ");
         GameBoardInfo[y][GBOARD_WIDTH] = 1;
     }
 
-    //ÁÂº¯
+    //ì¢Œë³€
     for (y = 0; y <= GBOARD_HEIGHT; y++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X, GBOARD_ORIGIN_Y + y);
-        if (y == 0) printf("¡á");
-        else if (y == GBOARD_HEIGHT) printf("¡á");
-        else printf("¡á");
+        if (y == 0) printf("â– ");
+        else if (y == GBOARD_HEIGHT) printf("â– ");
+        else printf("â– ");
         GameBoardInfo[y][0] = 1;
     }
 
-    //¾Ë¸²Ã¢
-    //»ó´Ü
+    //ì•Œë¦¼ì°½
+    //ìƒë‹¨
     for (x = 1; x < GBOARD_WIDTH * 2; x++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X + x, GBOARD_ORIGIN_Y + GBOARD_HEIGHT + 1);
-        printf("¦¡");
+        printf("â”€");
     }
 
-    //¿ìº¯
+    //ìš°ë³€
     for (y = GBOARD_HEIGHT + 1; y <= GBOARD_HEIGHT + 3; y++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X + GBOARD_WIDTH * 2, GBOARD_ORIGIN_Y + y);
-        if (y == GBOARD_HEIGHT + 1) printf("¦¤");
-        else if (y == GBOARD_HEIGHT + 3) printf("¦¥");
-        else printf("¦¢");
+        if (y == GBOARD_HEIGHT + 1) printf("â”");
+        else if (y == GBOARD_HEIGHT + 3) printf("â”˜");
+        else printf("â”‚");
     }
 
-    //ÁÂº¯
+    //ì¢Œë³€
     for (y = GBOARD_HEIGHT + 1; y <= GBOARD_HEIGHT + 3; y++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X, GBOARD_ORIGIN_Y + y);
-        if (y == GBOARD_HEIGHT + 1) printf("¦£");
-        else if (y == GBOARD_HEIGHT + 3) printf("¦¦");
-        else printf("¦¢");
+        if (y == GBOARD_HEIGHT + 1) printf("â”Œ");
+        else if (y == GBOARD_HEIGHT + 3) printf("â””");
+        else printf("â”‚");
     }
 
-    //ÇÏ´Ü
+    //í•˜ë‹¨
     for (x = 1; x < GBOARD_WIDTH * 2; x++) {
         SetCurrentCursorPos(GBOARD_ORIGIN_X + x, GBOARD_ORIGIN_Y + GBOARD_HEIGHT + 3);
-        printf("¦¡");
+        printf("â”€");
     }
 }
 
 void displayNotice(char* str) {
     textcolor(WHITE);
     SetCurrentCursorPos(GBOARD_ORIGIN_X + 2, GBOARD_ORIGIN_Y + GBOARD_HEIGHT + 2);
-    printf("¢º %s", str);
+    printf("â–¶ %s", str);
 }
 
 void eraseNotice() {
@@ -139,24 +139,24 @@ void eraseNotice() {
 }
 
 void LevelUp() {
-    //¿¹¿Ü Ã³¸®
+    //ì˜ˆì™¸ ì²˜ë¦¬
     if (selectedSkill[0] / 10 % 10 == 3 && selectedSkill[1] / 10 % 10 == 3 && selectedSkill[2] / 10 % 10 == 3) return;
 
     int inFlag = flag;
     if (inFlag == -1) {
-        displayNotice("·¹º§ ¾÷!!! 3°¡Áö ½ºÅ³ Áß ÇÏ³ª¸¦ ¼±ÅÃÇÏ¼¼¿ä. (ÀÔ·Â: ¼ıÀÚ 1, 2, 3)");
+        displayNotice("ë ˆë²¨ ì—…!!! 3ê°€ì§€ ìŠ¤í‚¬ ì¤‘ í•˜ë‚˜ë¥¼ ì„ íƒí•˜ì„¸ìš”. (ì…ë ¥: ìˆ«ì 1, 2, 3)");
         SelectNewSkill();
         eraseNotice();
         drawSelectedSkillList();
 
     }
     else if (score >= maxExpScore) {
-        displayNotice("·¹º§ ¾÷!!! 3°¡Áö ½ºÅ³ Áß ÇÏ³ª¸¦ ¼±ÅÃÇÏ¼¼¿ä. (ÀÔ·Â: ¼ıÀÚ 1, 2, 3)");
+        displayNotice("ë ˆë²¨ ì—…!!! 3ê°€ì§€ ìŠ¤í‚¬ ì¤‘ í•˜ë‚˜ë¥¼ ì„ íƒí•˜ì„¸ìš”. (ì…ë ¥: ìˆ«ì 1, 2, 3)");
         SelectNewSkill();
         eraseNotice();
         drawSelectedSkillList();
 
-        //¿ä±¸ exp Áõ°¡
+        //ìš”êµ¬ exp ì¦ê°€
         maxExpScore = ((maxExpScore / 3) * 4 + maxExpScore) / 100 * 100;
     }
 }
@@ -167,7 +167,7 @@ void IncreaseScore() {
     LevelUp();
 }
 
-//°ÔÀÓÆÇ ¹è¿­ µğ¹ö±×¿ë
+//ê²Œì„íŒ ë°°ì—´ ë””ë²„ê·¸ìš©
 void Debug_GameBoardInfo() {
     int data;
     textcolor(WHITE);
@@ -206,7 +206,7 @@ void Debug_GameBoardInfo() {
     }
 }
 
-//UI ÁÂÇ¥ ÃÊ±âÈ­
+//UI ì¢Œí‘œ ì´ˆê¸°í™”
 void initPosUI() {
     pos_time.X = GBOARD_ORIGIN_X + (GBOARD_WIDTH + 3) * 2;
     pos_time.Y = GBOARD_ORIGIN_Y + 1;
@@ -219,7 +219,7 @@ void initPosUI() {
 
     pos_hp.X = GBOARD_ORIGIN_X + (GBOARD_WIDTH + 3) * 2;
     pos_hp.Y = GBOARD_ORIGIN_Y + 5;
-
+    
     pos_skillList.X = GBOARD_ORIGIN_X + (GBOARD_WIDTH + 3) * 2;
     pos_skillList.Y = GBOARD_ORIGIN_Y + 9;
 
@@ -227,132 +227,132 @@ void initPosUI() {
     pos_skillSelect.Y = GBOARD_ORIGIN_Y + 16;
 }
 
-//ÀÎ°ÔÀÓ UI Ç¥½Ã
+//ì¸ê²Œì„ UI í‘œì‹œ
 void DrawIngameUI() {
-    drawStage(); //½ºÅ×ÀÌÁö
-    drawTime(); //½Ã°£
-    drawHP(); //Ã¼·Â
-    drawScore(); //½ºÄÚ¾î
-    drawSelectedSkillList(); //º¸À¯ ½ºÅ³
+    drawStage(); //ìŠ¤í…Œì´ì§€
+    drawTime(); //ì‹œê°„
+    drawHP(); //ì²´ë ¥
+    drawScore(); //ìŠ¤ì½”ì–´
+    drawSelectedSkillList(); //ë³´ìœ  ìŠ¤í‚¬
 }
 
-//½ºÅ×ÀÌÁö Ç¥½Ã
+//ìŠ¤í…Œì´ì§€ í‘œì‹œ
 void drawStage() {
     SetCurrentCursorPos(pos_stage.X, pos_stage.Y);
     textcolor(GRAY);
-    printf("< ½ºÅ×ÀÌÁö %d >", stage);
+    printf("< ìŠ¤í…Œì´ì§€ %d >", stage);
 }
 
 void drawTime() {
     SetCurrentCursorPos(pos_time.X, pos_time.Y);
     textcolor(WHITE);
-    printf("¢º ³²Àº ½Ã°£ : %-4d", (STAGETIME - (TimeCount % STAGETIME)) / 6);
+    printf("â–¶ ë‚¨ì€ ì‹œê°„ : %-4d", (STAGETIME - (TimeCount % STAGETIME)) / 6);
 }
 
-//½ºÄÚ¾î Ç¥½Ã
+//ìŠ¤ì½”ì–´ í‘œì‹œ
 void drawScore() {
     SetCurrentCursorPos(pos_score.X, pos_score.Y);
     textcolor(WHITE);
-    printf("¢º ½ºÄÚ¾î  :  %-6d", score);
+    printf("â–¶ ìŠ¤ì½”ì–´  :  %-6d", score);
 }
 
-//Ã¼·Â Ãâ·ÂÇÏ°í °ÔÀÓ ¿À¹ö °Ë»ç
+//ì²´ë ¥ ì¶œë ¥í•˜ê³  ê²Œì„ ì˜¤ë²„ ê²€ì‚¬
 void drawHP() {
     SetCurrentCursorPos(pos_hp.X, pos_hp.Y);
     textcolor(WHITE);
-    printf("¢º Ã¼·Â  :  ");
+    printf("â–¶ ì²´ë ¥  :  ");
 
     textcolor(RED);
-    for (int i = 0; i < HP; i++) printf("¢¾");
+    for (int i = 0; i < HP; i++) printf("â™¥");
     textcolor(darkRED);
-    for (int i = HP; i < maxHP; i++) printf("¢½");
+    for (int i = HP; i < maxHP; i++) printf("â™¡");
 
     if (GameOver()) ShowMainMenu();
 }
 
-//º¸À¯ÇÑ ½ºÅ³ Á¤º¸ Ãâ·Â
+//ë³´ìœ í•œ ìŠ¤í‚¬ ì •ë³´ ì¶œë ¥
 void drawSelectedSkillList() {
     int type, level;
 
     SetCurrentCursorPos(pos_skillList.X, pos_skillList.Y);
     textcolor(WHITE);
-    printf("¢º °¡Áø ½ºÅ³");
-
+    printf("â–¶ ê°€ì§„ ìŠ¤í‚¬");
+    
     textcolor(GRAY);
     SetCurrentCursorPos(pos_skillList.X, pos_skillList.Y + 1);
     if (selectedSkill[0] == 0) {
-        printf("¢¹ ¿ø°Å¸® : ");
+        printf("â–· ì›ê±°ë¦¬ : ");
         textcolor(darkGRAY);
-        printf("¹Ìº¸À¯");
+        printf("ë¯¸ë³´ìœ ");
     }
     else {
         type = (selectedSkill[0] / 100) % 10;
         level = (selectedSkill[0] / 10) % 10;
-        printf("¢¹ ¿ø°Å¸® : %-16s", skillList[type - 1][level - 1].name);
+        printf("â–· ì›ê±°ë¦¬ : %-16s", skillList[type - 1][level - 1].name);
     }
 
     textcolor(GRAY);
     SetCurrentCursorPos(pos_skillList.X, pos_skillList.Y + 2);
     if (selectedSkill[1] == 0) {
-        printf("¢¹ ±Ù°Å¸® : ");
+        printf("â–· ê·¼ê±°ë¦¬ : ");
         textcolor(darkGRAY);
-        printf("¹Ìº¸À¯");
+        printf("ë¯¸ë³´ìœ ");
     }
     else {
         type = (selectedSkill[1] / 100) % 10;
         level = (selectedSkill[1] / 10) % 10;
-        printf("¢¹ ±Ù°Å¸® : %-16s", skillList[type - 1][level - 1].name);
+        printf("â–· ê·¼ê±°ë¦¬ : %-16s", skillList[type - 1][level - 1].name);
     }
 
     textcolor(GRAY);
     SetCurrentCursorPos(pos_skillList.X, pos_skillList.Y + 3);
     if (selectedSkill[2] == 0) {
-        printf("¢¹ ÆĞ½Ãºê : ");
+        printf("â–· íŒ¨ì‹œë¸Œ : ");
         textcolor(darkGRAY);
-        printf("¹Ìº¸À¯");
+        printf("ë¯¸ë³´ìœ ");
     }
     else {
         type = (selectedSkill[2] / 100) % 10;
         level = (selectedSkill[2] / 10) % 10;
-        printf("¢¹ ÆĞ½Ãºê : %-16s", skillList[type - 1][level - 1].name);
+        printf("â–· íŒ¨ì‹œë¸Œ : %-16s", skillList[type - 1][level - 1].name);
     }
 }
 
-//½ºÅ³ ÀÌÆåÆ® ±×¸®±â
+//ìŠ¤í‚¬ ì´í™íŠ¸ ê·¸ë¦¬ê¸°
 void drawSkillShape(int type, int level) {
     textcolor(GRAY);
     printf("%s", skillList[type - 1][level - 1].e);
 }
 
-//PC ±×¸®±â
+//PC ê·¸ë¦¬ê¸°
 void drawPC() {
     textcolor(WHITE);
     for (int y = 0; y < 2; y++) {
-        for (int x = 0; x < 2; x++) {
+        for (int x = 0; x < 2; x++) { 
             GameBoardInfo[PCPoint[1] + y][PCPoint[0] + x] = PC;
             SetCurrentCursorPos((PCPoint[0] + x) * 2 + GBOARD_ORIGIN_X, (PCPoint[1] + y) + GBOARD_ORIGIN_Y);
 
             switch (lastDir)
             {
             case EAST:
-                if (x == 1 && y == 1) textcolor(RED), printf("¢º");
-                else if (x == 1 && y == 0) textcolor(WHITE), printf("¢º");
-                else textcolor(YELLOW), printf("¡á");
+                if (x == 1 && y == 1) textcolor(RED), printf("â–¶");
+                else if (x == 1 && y == 0) textcolor(WHITE), printf("â–¶");
+                else textcolor(YELLOW), printf("â– ");
                 break;
             case WEST:
-                if (x == 0 && y == 0) textcolor(RED), printf("¢¸");
-                else if (x == 0 && y == 1) textcolor(WHITE), printf("¢¸");
-                else textcolor(YELLOW), printf("¡á");
+                if (x == 0 && y == 0) textcolor(RED), printf("â—€");
+                else if (x == 0 && y == 1) textcolor(WHITE), printf("â—€");
+                else textcolor(YELLOW), printf("â– ");
                 break;
             case NORTH:
-                if (y == 0 && x == 1) textcolor(RED), printf("¡ã");
-                else if (y == 0 && x == 0) textcolor(WHITE), printf("¡ã");
-                else textcolor(YELLOW), printf("¡á");
+                if (y == 0 && x == 1) textcolor(RED), printf("â–²");
+                else if (y == 0 && x == 0) textcolor(WHITE), printf("â–²");
+                else textcolor(YELLOW), printf("â– ");
                 break;
             case SOUTH:
-                if (y == 1 && x == 0) textcolor(RED), printf("¡å");
-                else if (y == 1 && x == 1) textcolor(WHITE), printf("¡å");
-                else textcolor(YELLOW), printf("¡á");
+                if (y == 1 && x == 0) textcolor(RED), printf("â–¼");
+                else if (y == 1 && x == 1) textcolor(WHITE), printf("â–¼");
+                else textcolor(YELLOW), printf("â– ");
                 break;
                 break;
             }
@@ -360,7 +360,7 @@ void drawPC() {
     }
 }
 
-//PC Áö¿ì±â
+//PC ì§€ìš°ê¸°
 void erasePC() {
     for (int y = 0; y < 2; y++) {
         for (int x = 0; x < 2; x++) {
@@ -371,22 +371,22 @@ void erasePC() {
     }
 }
 
-//NPC ±×¸®±â
+//NPC ê·¸ë¦¬ê¸°
 void drawNpcShape() {
     textcolor(darkGREEN);
-    printf("¡Ü");
+    printf("â—");
 }
 
-//RangeNPC ±×¸®±â
+//RangeNPC ê·¸ë¦¬ê¸°
 void drawRangeNpcShape() {
     textcolor(BLUE);
-    printf("¡ß");
+    printf("â—†");
 }
 
-//StopRangeNPC ±×¸®±â
+//StopRangeNPC ê·¸ë¦¬ê¸°
 void drawStopRangeNpcShape() {
     textcolor(SKYBLUE);
-    printf("¡ß");
+    printf("â—†");
 }
 
 void drawItemShape(int num) {
@@ -394,21 +394,21 @@ void drawItemShape(int num) {
     printf("%s", itemList[num].shape);
 }
 
-//°ÔÀÓ ¿À¹ö
+//ê²Œì„ ì˜¤ë²„
 int GameOver() {
-    if (HP > 0) return 0; //hp°¡ 0º¸´Ù Å©¸é return 0
+    if (HP > 0) return 0; //hpê°€ 0ë³´ë‹¤ í¬ë©´ return 0
 
-    //±â¾ï ¾÷µ¥ÀÌÆ®
+    //ê¸°ì–µ ì—…ë°ì´íŠ¸
     UpdateMemoryList();
 
-    //pc Á¦°Å
+    //pc ì œê±°
     SetCurrentCursorPos(GBOARD_ORIGIN_X + PCPoint[0] * 2, GBOARD_ORIGIN_Y + PCPoint[1]);
     printf("  ");
 
-    //¸ğµç À¯´Ö Á¦°Å
+    //ëª¨ë“  ìœ ë‹› ì œê±°
     EraseGameBoard();
 
-    //°ÔÀÓ ¿À¹ö ¹®±¸ Ãâ·Â ¹× ESC ÀÔ·ÂÀ¸·Î ¸ŞÀÎ ¸Ş´º ÀÌµ¿
+    //ê²Œì„ ì˜¤ë²„ ë¬¸êµ¬ ì¶œë ¥ ë° ESC ì…ë ¥ìœ¼ë¡œ ë©”ì¸ ë©”ë‰´ ì´ë™
     int y = -2;
     SetCurrentCursorPos(47, center.Y + y);
     textcolor(darkRED);
@@ -423,12 +423,12 @@ int GameOver() {
     }
     SetCurrentCursorPos(48 - x / 2, center.Y + y);
     textcolor(WHITE);
-    printf("ÃÖÁ¾ ½ºÄÚ¾î : %d", score);
+    printf("ìµœì¢… ìŠ¤ì½”ì–´ : %d", score);
 
     y += 2;
     SetCurrentCursorPos(39, center.Y + y);
     textcolor(darkGRAY);
-    printf("(ESC¸¦ ´­·¯ ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â)");
+    printf("(ESCë¥¼ ëˆŒëŸ¬ ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°)");
 
     while (1) {
         GetKeyboardInput();
@@ -439,26 +439,26 @@ int GameOver() {
     return 1;
 }
 
-//°ÔÀÓ Å¬¸®¾î
+//ê²Œì„ í´ë¦¬ì–´
 void GameClear() {
-    if (BossHP > 0) return; //BossHP°¡ 0º¸´Ù Å©¸é return
+    if (BossHP > 0) return; //BossHPê°€ 0ë³´ë‹¤ í¬ë©´ return
 
-     //±â¾ï ¾÷µ¥ÀÌÆ®
+     //ê¸°ì–µ ì—…ë°ì´íŠ¸
     memoryList[19].check = TRUE;
     UpdateMemoryList();
 
-    //½ºÄÚ¾î Áõ°¡
+    //ìŠ¤ì½”ì–´ ì¦ê°€
     score += 5000;
     drawScore();
 
-    //pc Á¦°Å
+    //pc ì œê±°
     SetCurrentCursorPos(GBOARD_ORIGIN_X + PCPoint[0] * 2, GBOARD_ORIGIN_Y + PCPoint[1]);
     printf("  ");
 
-    //¸ğµç À¯´Ö Á¦°Å
+    //ëª¨ë“  ìœ ë‹› ì œê±°
     EraseGameBoard();
 
-    //°ÔÀÓ ¿À¹ö ¹®±¸ Ãâ·Â ¹× ESC ÀÔ·ÂÀ¸·Î ¸ŞÀÎ ¸Ş´º ÀÌµ¿
+    //ê²Œì„ ì˜¤ë²„ ë¬¸êµ¬ ì¶œë ¥ ë° ESC ì…ë ¥ìœ¼ë¡œ ë©”ì¸ ë©”ë‰´ ì´ë™
     int y = -2;
     SetCurrentCursorPos(46, center.Y + y);
     textcolor(SKYBLUE);
@@ -473,12 +473,12 @@ void GameClear() {
     }
     SetCurrentCursorPos(48 - x / 2, center.Y + y);
     textcolor(WHITE);
-    printf("ÃÖÁ¾ ½ºÄÚ¾î : %d", score);
+    printf("ìµœì¢… ìŠ¤ì½”ì–´ : %d", score);
 
     y += 2;
     SetCurrentCursorPos(39, center.Y + y);
     textcolor(darkGRAY);
-    printf("(ESC¸¦ ´­·¯ ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â)");
+    printf("(ESCë¥¼ ëˆŒëŸ¬ ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°)");
 
     while (1) {
         GetKeyboardInput();
@@ -489,19 +489,19 @@ void GameClear() {
     ShowMainMenu();
 }
 
-//°ÔÀÓÆÇ ¸ğµç À¯´Ö Á¦°Å
+//ê²Œì„íŒ ëª¨ë“  ìœ ë‹› ì œê±°
 void EraseGameBoard() {
-    //°¢Á¾ npc ¹× Åõ»çÃ¼ Á¦°ÅÇÏ°í ½ºÄÚ¾î º¹±¸
+    //ê°ì¢… npc ë° íˆ¬ì‚¬ì²´ ì œê±°í•˜ê³  ìŠ¤ì½”ì–´ ë³µêµ¬
     finalScore = score;
     AllDie();
     score = finalScore;
 
-    //pc Á¦°Å
+    //pc ì œê±°
     if (stage == 2 || stage == 3) {
         erasePC();
     }
 
-    //½ºÅ³ Á¦°Å
+    //ìŠ¤í‚¬ ì œê±°
     for (int i = 0; i <= skillTop; i++) {
         GameBoardInfo[skillEffectInfo[i].Y][skillEffectInfo[i].X] = 0;
         SetCurrentCursorPos(GBOARD_ORIGIN_X + skillEffectInfo[i].X * 2, GBOARD_ORIGIN_Y + skillEffectInfo[i].Y);
@@ -509,7 +509,7 @@ void EraseGameBoard() {
     }
     skillTop = -1;
 
-    //¾ÆÀÌÅÛ µî ³ª¸ÓÁö Á¦°Å
+    //ì•„ì´í…œ ë“± ë‚˜ë¨¸ì§€ ì œê±°
     for (int y = 1; y < GBOARD_HEIGHT; y++) {
         for (int x = 1; x < GBOARD_WIDTH; x++) {
             if (GameBoardInfo[y][x] != 0) {
@@ -521,7 +521,7 @@ void EraseGameBoard() {
     }
 }
 
-//hp °¨¼Ò
+//hp ê°ì†Œ
 void DecreaseHP() {
     textcolor(RED);
     for (int y = 0; y < 2; y++) {
@@ -532,20 +532,20 @@ void DecreaseHP() {
             switch (lastDir)
             {
             case EAST:
-                if (x == 1) printf("¢º");
-                else printf("¡á");
+                if (x == 1) printf("â–¶");
+                else printf("â– ");
                 break;
             case WEST:
-                if (x == 0) printf("¢¸");
-                else printf("¡á");
+                if (x == 0) printf("â—€");
+                else printf("â– ");
                 break;
             case NORTH:
-                if (y == 0) printf("¡ã");
-                else printf("¡á");
+                if (y == 0) printf("â–²");
+                else printf("â– ");
                 break;
             case SOUTH:
-                if (y == 1) printf("¡å");
-                else printf("¡á");
+                if (y == 1) printf("â–¼");
+                else printf("â– ");
                 break;
                 break;
             }
@@ -560,7 +560,7 @@ void DecreaseHP() {
     drawHP();
 }
 
-//º¸½º hp °¨¼Ò
+//ë³´ìŠ¤ hp ê°ì†Œ
 void DecreaseBossHP() {
     //darkRED ShowBoss
     textcolor(darkRED);
@@ -569,9 +569,9 @@ void DecreaseBossHP() {
             SetCurrentCursorPos(BossPoint[0] * 2 + GBOARD_ORIGIN_X + x * 2, BossPoint[1] + GBOARD_ORIGIN_Y + y);
             if (BossModel[y][x] == BossNum) {
                 GameBoardInfo[BossPoint[1] + y][BossPoint[0] + x] = BossNum;
-                if (y == 2 && (x == 1 || x == 5)) printf("¡Ü");
-                else if (y == 3 && x == 3) printf("¡ã");
-                else printf("¡á");
+                if (y == 2 && (x == 1 || x == 5)) printf("â—");
+                else if (y == 3 && x == 3) printf("â–²");
+                else printf("â– ");
             }
         }
     }
@@ -579,7 +579,7 @@ void DecreaseBossHP() {
     Sleep(50);
 
     BossHP--;
-
+    
 
     ShowBoss();
 }
@@ -601,7 +601,7 @@ void UpdateMemoryList() {
     if (stage >= 2 && !memoryList[1].check) memoryList[1].check = TRUE;
     if (stage == 3 && !memoryList[2].check) memoryList[2].check = TRUE;
     if (selectedSkill[0] / 100 >= 1 && selectedSkill[0] / 100 <= 3 && selectedSkill[0] % 100 / 10 >= 2 && !memoryList[3].check) memoryList[3].check = TRUE;
-    if (selectedSkill[0] == 130 && !memoryList[4].check) memoryList[4].check = TRUE;
+    if(selectedSkill[0] ==130 && !memoryList[4].check) memoryList[4].check = TRUE;
     if (selectedSkill[0] == 230 && !memoryList[5].check) memoryList[5].check = TRUE;
     if (selectedSkill[0] == 330 && !memoryList[6].check) memoryList[6].check = TRUE;
     if (selectedSkill[1] / 100 == 4 && !memoryList[7].check) memoryList[7].check = TRUE;
