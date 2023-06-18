@@ -2024,3 +2024,80 @@ void ShowBossSkill_Waffle_Down(int y1) {
         random = 5;
     }
 }
+void DeleteBossSkill() {
+    for (int y = 0; y < GBOARD_HEIGHT + 2; y++) {
+        for (int x = 0; x < GBOARD_WIDTH + 2; x++) {
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + 2 * x, GBOARD_ORIGIN_Y + y);
+            if (GameBoardInfo[y][x] == BossSkillEffect) {
+                GameBoardInfo[y][x] = 0;
+                printf("  ");
+            }
+        }
+    }
+}
+void DeleteBossSkill2() {
+    for (int y = 0; y < GBOARD_HEIGHT + 2; y++) {
+        for (int x = 0; x < GBOARD_WIDTH + 2; x++) {
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + 2 * x, GBOARD_ORIGIN_Y + y);
+            if (GameBoardInfo[y][x] == 800) {
+                GameBoardInfo[y][x] = 0;
+                printf("  ");
+            }
+        }
+    }
+}
+
+void BossMove() {
+    //새로운 위치
+    int newX = BossPoint[0];
+    int newY = BossPoint[1];
+
+    //기존 위치
+    int x = BossPoint[0];
+    int y = BossPoint[1];
+
+    DeleteBoss();
+    DeleteBossSkill();
+
+    if (BossPoint[0] + 4 < PCPoint[0]) newX++;           //pc따라가기
+    else if (BossPoint[0] + 4 > PCPoint[0]) newX--;
+    if (BossPoint[1] + 4 < PCPoint[1]) newY++;
+    else if (BossPoint[1] + 4 > PCPoint[1]) newY--;
+
+    //pc 충돌검사
+    for (int i = newY; i < newY + 7; i++) {
+        for (int j = newX; j < newX + 7; j++) {
+            //pc에 인접하면 pc hp 감소
+            if (BossModel[i - newY][j - newX] == BossNum && GameBoardInfo[i][j] == PC) {
+                newX = x;
+                newY = y;
+                DecreaseHP();
+            }
+            //pc 스킬에 인접하면 pc 스킬 없어지고 보스 hp 감소
+            else if (BossModel[i - newY][j - newX] == BossNum && GameBoardInfo[i][j] > 100) {
+                for (int idx = 0; idx <= skillTop; idx++) {
+                    if (skillEffectInfo[idx].X == j && skillEffectInfo[idx].Y == i) {
+                        RemoveSkillEffect(idx);
+                        break;
+                    }
+                }
+                newX = x;
+                newY = y;
+                DecreaseBossHP();
+            }
+        }
+    }
+    if (GameBoardInfo[newY][newX] == WALL) {           //벽충돌검사
+        if (newX < 2) newX++;
+        if (newY < 1) newY++;
+    }
+    if (GameBoardInfo[newY + 8][newX + 8] == WALL) {   //벽충돌검사
+        if (newX + 8 >= GBOARD_WIDTH) newX--;
+        if (newY + 8 >= GBOARD_HEIGHT) newY--;
+    }
+    BossPoint[0] = newX;
+    BossPoint[1] = newY;
+    SetCurrentCursorPos(GBOARD_ORIGIN_X + BossPoint[0] * 2, GBOARD_ORIGIN_Y + BossPoint[1]);
+    ShowBoss();
+    if (bossFlag == 3) ShowBossSkill_Circle();
+}
