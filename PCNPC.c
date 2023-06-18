@@ -12,6 +12,7 @@
 #include "ItemData.h"
 #include "KeyInput.h"
 #include "Cursor.h"
+#include"Stage.h"
 int ChainsawTouched[6] = { 0 };
 int NpcInfo[maxmob][2] = { 0 };
 int RangeNpcInfo[maxmob][2] = { 0 };
