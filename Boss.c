@@ -124,3 +124,335 @@ void DeleteBoss() {
         }
     }
 }
+void ShowBossSkill_Circle() {                //스킬궤도 왼쪽위 좌표 (BossX-5,BossY-5)
+    int X, Y;
+    int TC = ((TimeCount - 1) % 5) * 3;         //움직임 구현
+
+    textcolor(darkYELLOW); //색상 설정
+    for (int y = 0; y < 3; y++) {
+        for (int x = 0; x < 3; x++) {
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + (BossPoint[0] - 5 + TC + x) * 2, GBOARD_ORIGIN_Y + BossPoint[1] - 5 + y);
+            if (BossSkillModel[y][x] == BossSkillEffect) {
+                X = BossPoint[0] - 5 + TC + x;
+                Y = BossPoint[1] - 5 + y;
+                if ((X >= 1 && X < GBOARD_WIDTH) && (Y >= 1 && Y < GBOARD_HEIGHT)) {
+                    if (GameBoardInfo[Y][X] == PC) {
+                        //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                        DecreaseHP();
+                    }
+                    else if (GameBoardInfo[Y][X] > 100) {
+                        //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                        for (int idx = 0; idx <= skillTop; idx++) {
+                            if (skillEffectInfo[idx].X == X && skillEffectInfo[idx].Y == Y) {
+                                RemoveSkillEffect(idx);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        //나머지 경우 보스 스킬 저장 및 그리기
+                        GameBoardInfo[Y][X] = BossSkillEffect;
+                        printf("□");
+                    }
+                }
+            }
+        }
+    }
+    for (int y = 0; y < 3; y++) {
+        for (int x = 0; x < 3; x++) {
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + (BossPoint[0] + 9 + x) * 2, GBOARD_ORIGIN_Y + BossPoint[1] - 5 + y + TC);
+            if (BossSkillModel[y][x] == BossSkillEffect) {
+                X = BossPoint[0] + 9 + x;
+                Y = BossPoint[1] - 5 + y + TC;
+                if ((X >= 1 && X < GBOARD_WIDTH) && (Y >= 1 && Y < GBOARD_HEIGHT)) {
+                    if (GameBoardInfo[Y][X] == PC) {
+                        //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                        DecreaseHP();
+                    }
+                    else if (GameBoardInfo[Y][X] > 100) {
+                        //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                        for (int idx = 0; idx <= skillTop; idx++) {
+                            if (skillEffectInfo[idx].X == X && skillEffectInfo[idx].Y == Y) {
+                                RemoveSkillEffect(idx);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        //나머지 경우 보스 스킬 저장 및 그리기
+                        GameBoardInfo[Y][X] = BossSkillEffect;
+                        printf("□");
+                    }
+                }
+            }
+        }
+    }
+    for (int y = 0; y < 3; y++) {
+        for (int x = 0; x < 3; x++) {
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + (BossPoint[0] + 9 - TC + x) * 2, GBOARD_ORIGIN_Y + BossPoint[1] + 9 + y);
+            if (BossSkillModel[y][x] == BossSkillEffect) {
+                X = BossPoint[0] + 9 - TC + x;
+                Y = BossPoint[1] + 9 + y;
+                if ((X >= 1 && X < GBOARD_WIDTH) && (Y >= 1 && Y < GBOARD_HEIGHT)) {
+                    if (GameBoardInfo[Y][X] == PC) {
+                        //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                        DecreaseHP();
+                    }
+                    else if (GameBoardInfo[Y][X] > 100) {
+                        //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                        for (int idx = 0; idx <= skillTop; idx++) {
+                            if (skillEffectInfo[idx].X == X && skillEffectInfo[idx].Y == Y) {
+                                RemoveSkillEffect(idx);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        //나머지 경우 보스 스킬 저장 및 그리기
+                        GameBoardInfo[Y][X] = BossSkillEffect;
+                        printf("□");
+                    }
+                }
+            }
+        }
+    }
+    for (int y = 0; y < 3; y++) {
+        for (int x = 0; x < 3; x++) {
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + (BossPoint[0] - 5 + x) * 2, GBOARD_ORIGIN_Y + BossPoint[1] + 9 - TC + y);
+            if (BossSkillModel[y][x] == BossSkillEffect) {
+                X = BossPoint[0] - 5 + x;
+                Y = BossPoint[1] + 9 - TC + y;
+                if ((X >= 1 && X < GBOARD_WIDTH) && (Y >= 1 && Y < GBOARD_HEIGHT)) {
+                    if (GameBoardInfo[Y][X] == PC) {
+                        //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                        DecreaseHP();
+                    }
+                    else if (GameBoardInfo[Y][X] > 100) {
+                        //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                        for (int idx = 0; idx <= skillTop; idx++) {
+                            if (skillEffectInfo[idx].X == X && skillEffectInfo[idx].Y == Y) {
+                                RemoveSkillEffect(idx);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        //나머지 경우 보스 스킬 저장 및 그리기
+                        GameBoardInfo[Y][X] = BossSkillEffect;
+                        printf("□");
+                    }
+                }
+            }
+        }
+    }
+}
+
+void ShowBossSkill_Rect(int X1, int Y1, int X2, int Y2) {
+    int x, y;
+
+    textcolor(darkGREEN);
+    for (x = X1; x <= X2; x++) {
+        y = Y1;
+        SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+        if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+            if (GameBoardInfo[y][x] == PC) {
+                //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                DecreaseHP();
+            }
+            else if (GameBoardInfo[y][x] > 100) {
+                //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                for (int idx = 0; idx <= skillTop; idx++) {
+                    if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                        RemoveSkillEffect(idx);
+                        break;
+                    }
+                }
+            }
+            else {
+                //나머지 경우 보스 스킬 저장 및 그리기
+                GameBoardInfo[y][x] = BossSkillEffect;
+                printf("□");
+            }
+        }
+    }
+    for (y = Y1; y <= Y2; y++) {
+        x = X1;
+        SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+        if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+            if (GameBoardInfo[y][x] == PC) {
+                //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                DecreaseHP();
+            }
+            else if (GameBoardInfo[y][x] > 100) {
+                //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                for (int idx = 0; idx <= skillTop; idx++) {
+                    if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                        RemoveSkillEffect(idx);
+                        break;
+                    }
+                }
+            }
+            else {
+                //나머지 경우 보스 스킬 저장 및 그리기
+                GameBoardInfo[y][x] = BossSkillEffect;
+                printf("□");
+            }
+        }
+    }
+    for (y = Y1; y <= Y2; y++) {
+        x = X2;
+        SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+        if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+            if (GameBoardInfo[y][x] == PC) {
+                //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                DecreaseHP();
+            }
+            else if (GameBoardInfo[y][x] > 100) {
+                //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                for (int idx = 0; idx <= skillTop; idx++) {
+                    if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                        RemoveSkillEffect(idx);
+                        break;
+                    }
+                }
+            }
+            else {
+                //나머지 경우 보스 스킬 저장 및 그리기
+                GameBoardInfo[y][x] = BossSkillEffect;
+                printf("□");
+            }
+        }
+    }
+    for (x = X1; x <= X2; x++) {
+        y = Y2;
+        SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+        if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+            if (GameBoardInfo[y][x] == PC) {
+                //pc 충돌 시 보스 스킬 삭제 및 pc hp 감소
+                DecreaseHP();
+            }
+            else if (GameBoardInfo[y][x] > 100) {
+                //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                for (int idx = 0; idx <= skillTop; idx++) {
+                    if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                        RemoveSkillEffect(idx);
+                        break;
+                    }
+                }
+            }
+            else {
+                //나머지 경우 보스 스킬 저장 및 그리기
+                GameBoardInfo[y][x] = BossSkillEffect;
+                printf("□");
+            }
+        }
+    }
+    XX1 -= 4;                   //사각형 크기 조절
+    YY1 -= 4;
+    XX2 += 4;
+    YY2 += 4;
+    if ((XX1 < 1 && YY1 < 1) && (XX2 > GBOARD_WIDTH && YY2 > GBOARD_HEIGHT)) {
+        DeleteBossSkill();
+        bossFlag = 0;
+    }
+}
+
+void ShowBossSkill_RectOrbit(int X1, int Y1, int X2, int Y2) {                   //스킬궤도
+    int x, y;
+    textcolor(WHITE);
+    while (!((X1 < 1 && Y1 < 1) && (X2 > GBOARD_WIDTH && Y2 > GBOARD_HEIGHT))) {
+        for (x = X1; x <= X2; x++) {
+            y = Y1;
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+            if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+                if (GameBoardInfo[y][x] > 100) {
+                    //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                    for (int idx = 0; idx <= skillTop; idx++) {
+                        if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                            RemoveSkillEffect(idx);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    //나머지 경우 보스 스킬 저장 및 그리기
+                    if (GameBoardInfo[y][x] != PC) {
+                        GameBoardInfo[y][x] = 800;
+                        printf("□");
+                    }
+                }
+            }
+            PC;
+        }
+        for (y = Y1; y <= Y2; y++) {
+            x = X1;
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+            if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+                if (GameBoardInfo[y][x] > 100) {
+                    //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                    for (int idx = 0; idx <= skillTop; idx++) {
+                        if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                            RemoveSkillEffect(idx);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    //나머지 경우 보스 스킬 저장 및 그리기
+                    if (GameBoardInfo[y][x] != PC) {
+                        GameBoardInfo[y][x] = 800;
+                        printf("□");
+                    }
+                }
+            }
+        }
+        for (y = Y1; y <= Y2; y++) {
+            x = X2;
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+            if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+                if (GameBoardInfo[y][x] > 100) {
+                    //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                    for (int idx = 0; idx <= skillTop; idx++) {
+                        if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                            RemoveSkillEffect(idx);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    //나머지 경우 보스 스킬 저장 및 그리기
+                    if (GameBoardInfo[y][x] != PC) {
+                        GameBoardInfo[y][x] = 800;
+                        printf("□");
+                    }
+                }
+            }
+        }
+        for (x = X1; x <= X2; x++) {
+            y = Y2;
+            SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+            if ((x >= 1 && x < GBOARD_WIDTH) && (y >= 1 && y < GBOARD_HEIGHT)) {
+                if (GameBoardInfo[y][x] > 100) {
+                    //pc 스킬 충돌 시 보스 스킬 및 pc 스킬 삭제
+                    for (int idx = 0; idx <= skillTop; idx++) {
+                        if (skillEffectInfo[idx].X == x && skillEffectInfo[idx].Y == y) {
+                            RemoveSkillEffect(idx);
+                            break;
+                        }
+                    }
+                }
+                else {
+                    //나머지 경우 보스 스킬 저장 및 그리기
+                    if (GameBoardInfo[y][x] != PC) {
+                        GameBoardInfo[y][x] = 800;
+                        printf("□");
+                    }
+                }
+            }
+        }
+        X1 -= 4;                   //사각형 크기 조절
+        Y1 -= 4;
+        X2 += 4;
+        Y2 += 4;
+    }
+}
