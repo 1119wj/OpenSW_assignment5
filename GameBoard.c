@@ -11,6 +11,8 @@
 #include "PCNPC.h"
 #include "KeyInput.h"
 #include "Cursor.h"
+#include"Stage.h"
+
 int GameBoardInfo[GBOARD_HEIGHT + 1][GBOARD_WIDTH + 1];
 int score = 0;
 int finalScore = 0;
@@ -24,6 +26,7 @@ COORD pos_hp;
 COORD pos_skillList;
 COORD pos_skillSelect;
 COORD cursor;
+COORD center;
 int maxExpScore;
 
 
@@ -64,8 +67,8 @@ void DrawBoard() {
         else if (y == GBOARD_HEIGHT) printf("■");
         else printf("■");
         GameBoardInfo[y][0] = 1;
-    }
 
+    }
     //알림창
     //상단
     for (x = 1; x < GBOARD_WIDTH * 2; x++) {
@@ -96,9 +99,52 @@ void DrawBoard() {
     }
 }
 
+//보드 전부 지우기
+void ClearBoard() {
+    system("cls"); //콘솔창 전부 지우는 명령어
+}
+//게임판 영역 지우기; 스테이지 표시 지우기용
+void ClearGameBoard() {
+    int x, y;
+    for (y = 1; y < GBOARD_HEIGHT; y++) {
+        for (x = 1; x < GBOARD_WIDTH; x++) {
+            if (GameBoardInfo[y][x] == 0) {
+                SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+                printf("  ");
+            }
+        }
+    }
+}
+void EraseGameBoard() {
+    //각종 npc 및 투사체 제거하고 스코어 복구
+    finalScore = score;
+    //AllDie();
+    score = finalScore;
 
- 
+    //pc 제거
+    if (stage == 2 || stage == 3) {
+        erasePC();
+    }
 
+    //스킬 제거
+    /*for (int i = 0; i <= skillTop; i++) {
+        GameBoardInfo[skillEffectInfo[i].Y][skillEffectInfo[i].X] = 0;
+        SetCurrentCursorPos(GBOARD_ORIGIN_X + skillEffectInfo[i].X * 2, GBOARD_ORIGIN_Y + skillEffectInfo[i].Y);
+        printf("  ");
+    }
+    skillTop = -1;
+    */
+    //아이템 등 나머지 제거
+    for (int y = 1; y < GBOARD_HEIGHT; y++) {
+        for (int x = 1; x < GBOARD_WIDTH; x++) {
+            if (GameBoardInfo[y][x] != 0) {
+                GameBoardInfo[y][x] = 0;
+                SetCurrentCursorPos(GBOARD_ORIGIN_X + x * 2, GBOARD_ORIGIN_Y + y);
+                printf("  ");
+            }
+        }
+    }
+}
 //PC 그리기
 void drawPC() {
     textcolor(WHITE);
@@ -145,7 +191,12 @@ void erasePC() {
         }
     }
 }
-
+//시간 표시
+void drawTime() {
+    SetCurrentCursorPos(pos_time.X, pos_time.Y);
+    textcolor(WHITE);
+    printf("▶ 남은 시간 : %-4d", (STAGETIME - (TimeCount % STAGETIME)) / 6);
+}
 //NPC 그리기
 void drawNpcShape() {
     textcolor(darkGREEN);
